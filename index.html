@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery.slideJS</title>
+	<link rel="stylesheet" href="fonts/fontCss.css">
+	<link rel="stylesheet" href="css/jquery.slider.css">
+</head>
+<body style="background:#222;width: 1200px;margin:0 auto" >
+	<div class="testSlider"></div>
+	<span class="testSlider1" style="margin-top: 40px;display: inline-block;"></span>
+	<span class="testSlider3" style="margin-top: 40px;margin-left:40px;display: inline-block;"></span>
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.slider.js"></script>
+<script>
+	var currentIndex = 0;
+	// $(document).ready(function(){
+	// 	var ulLength = $('.ul-slider').children().length * 1020;
+	// 	$('.ul-slider').css('width', ulLength );
+	// 	setInterval(function(){
+	// 		currentIndex ++;
+	// 		if(currentIndex > 4) {
+	// 			// currentIndex = 0
+	// 			$('.ul-slider').css('left',0)
+	// 			currentIndex = 1
+	// 		}
+	// 		$('.ul-slider').stop().animate({'left': -1020 * currentIndex},500)	
+	// 	},3000)
+	// });
+
+	$('.testSlider').slider({});
+	$('.testSlider1').slider({
+		width:300,
+		height:300,
+		showSlider: false,
+		showOrigin: false,
+		originPosition:'center'
+	});
+
+	$('.testSlider3').slider({
+		width:852,
+		height:300,
+		originPosition:'center'
+	});
+</script>
+</html>
