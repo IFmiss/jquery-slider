@@ -14,34 +14,23 @@
 <script src="js/jquery.js"></script>
 <script src="js/jquery.slider.js"></script>
 <script>
-	var currentIndex = 0;
-	// $(document).ready(function(){
-	// 	var ulLength = $('.ul-slider').children().length * 1020;
-	// 	$('.ul-slider').css('width', ulLength );
-	// 	setInterval(function(){
-	// 		currentIndex ++;
-	// 		if(currentIndex > 4) {
-	// 			// currentIndex = 0
-	// 			$('.ul-slider').css('left',0)
-	// 			currentIndex = 1
-	// 		}
-	// 		$('.ul-slider').stop().animate({'left': -1020 * currentIndex},500)	
-	// 	},3000)
-	// });
+	window.onload = function(){
+		$('.testSlider').slider({
+			originType:'tuoyuan'
+		});
+		$('.testSlider1').slider({
+			width:300,
+			height:300,
+			showSlider: false,
+			showOrigin: false,
+			originPosition:'center'
+		});
 
-	$('.testSlider').slider({});
-	$('.testSlider1').slider({
-		width:300,
-		height:300,
-		showSlider: false,
-		showOrigin: false,
-		originPosition:'center'
-	});
-
-	$('.testSlider3').slider({
-		width:852,
-		height:300,
-		originPosition:'center'
-	});
+		$('.testSlider3').slider({
+			width:852,
+			height:300,
+			originPosition:'center'
+		});
+	}
 </script>
 </html>

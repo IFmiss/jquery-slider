@@ -7,7 +7,7 @@
 				width: 					1200, 					// 幻灯片的宽度
 				height:     			500, 					// 幻灯片的高度
 				activeIndex: 			0, 						// 默认显示的幻灯片索引
-				speed: 					800, 					// 幻灯片的切换时间
+				speed: 					500, 					// 幻灯片的切换时间
 				durantion:  			3000, 					// 幻灯片的显示时间
 				showSlider: 			true, 					// 是否显示幻灯片左右按钮
 				showOrigin: 			true, 					// 是否显示底部的索引状态
@@ -47,6 +47,7 @@
 			
 			var currentIndex = 0; 		// 这是随机变化的索引 和插件的索引有区别的
 			var t ;						// 这是自动播放的 t
+			var canChange = true;		// 是否可以改变幻灯片    用于解决连续点击上一页下一页抖动问题
 
 			defaultValue.init = function() {
 				_this.cpt_slider = $('<div class="cpt-slider">').css({
@@ -74,6 +75,7 @@
 						_this.span_origin.appendTo(_this.slider_origin)
 					}
 				}
+				$('.span-origin.active').css({background:opt.originColor});
 				defaultValue.editView();
 			}
 
@@ -120,11 +122,19 @@
 
 				if(opt.showOrigin){
 					_this.left_select.on('click',function(){
-						defaultValue.prevPage();
+						if(canChange){
+							defaultValue.prevPage();
+						}else{
+							return
+						}
 					})
 
 					_this.right_select.on('click',function(){
-						defaultValue.nextPage();
+						if(canChange){
+							defaultValue.nextPage();
+						}else{
+							return
+						}
 					})
 
 					_this.slider_origin.children().hover(function(){
@@ -143,6 +153,7 @@
 			}
 
 			defaultValue.prevPage = function(){
+				canChange = false;
 				var length = _this.ul_slider.children().length;
 				currentIndex --;
 				if(currentIndex < 0) {
@@ -151,10 +162,13 @@
 					currentIndex = length - 2
 				}
 				defaultValue.setOriginState(currentIndex);
-				_this.ul_slider.stop().animate({'left': - currentIndex * opt.width},opt.speed)
+				_this.ul_slider.stop().animate({'left': - currentIndex * opt.width},opt.speed,'linear',function(){
+					canChange = true
+				})
 			}
 
 			defaultValue.nextPage = function(){
+				canChange = false;
 				var length = _this.ul_slider.children().length;
 				currentIndex ++;
 				if(currentIndex >= length) {
@@ -163,7 +177,9 @@
 					currentIndex = 1
 				}
 				defaultValue.setOriginState(currentIndex);
-				_this.ul_slider.stop().animate({'left': - opt.width * currentIndex},opt.speed)
+				_this.ul_slider.stop().animate({'left': - opt.width * currentIndex},opt.speed,'linear',function(){
+					canChange = true
+				})
 			}
 
 			//设置底部索引的状态  不管是在点击还是自动播放
